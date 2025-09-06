@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NirogAI - Your Multilingual Health Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c7da0;
+            --secondary: #a9d6e5;
+            --accent: #01497c;
+            --light: #e9f5f9;
+            --dark: #012a4a;
+            --user: #4caf50;
+            --doctor: #2196f3;
+            --admin: #f44336;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #ff9e44;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd166;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff9e44;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #ff8700;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232c7da0" opacity="0.1"/><path d="M0 0L100 100" stroke="%232c7da0" stroke-width="2" opacity="0.2"/><path d="M100 0L0 100" stroke="%232c7da0" stroke-width="2" opacity="0.2"/></svg>');
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--accent);
+        }
+        
+        .language-display {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-display h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
+        
+        .language-name {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* Tour Section */
+        .tour {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .tour-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .tour-option {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 25px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tour-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tour-icon {
+            background: var(--primary);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+        }
+        
+        .tour-option h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .tour-option p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .tour-content {
+            margin-top: 40px;
+            display: none;
+        }
+        
+        .tour-content.active {
+            display: block;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .audio-player {
+            background: var(--light);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .audio-btn {
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .audio-btn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+        
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: var(--primary);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #ff9e44;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Auth Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .auth-form h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+        
+        .role-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .role-btn {
+            padding: 12px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            background: #f5f5f5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .role-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .role-btn.user.active {
+            background: var(--user);
+            border-color: var(--user);
+        }
+        
+        .role-btn.doctor.active {
+            background: var(--doctor);
+            border-color: var(--doctor);
+        }
+        
+        .role-btn.admin.active {
+            background: var(--admin);
+            border-color: var(--admin);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .auth-form button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 25px;
+            color: #666;
+        }
+        
+        .auth-switch a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        .doctor-fields, .admin-fields {
+            display: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .language-display h2 {
+                font-size: 2.2rem;
+                height: 80px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth {
+                display: flex;
+                gap: 10px;
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .role-selector {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .language-display h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
+            .tour-option {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Nirog<span>AI</span></div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#tour">Tour</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <div class="auth-buttons">
+                        <a href="#" class="btn-outline" id="login-btn">Login</a>
+                        <a href="#" class="btn" id="signup-btn">Sign Up</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Multilingual Health Assistant</h1>
+            <p>AI-powered healthcare solutions accessible to everyone in multiple Indian languages</p>
+            
+            <div class="language-display">
+                <h2 id="main-word">NirogAI</h2>
+                <div class="language-name">
+                    <i class="fas fa-globe-asia"></i>
+                    <span id="current-language">English</span>
+                </div>
+            </div>
+            
+            <div class="mobile-auth">
+                <a href="#" class="btn-outline" id="mobile-login-btn">Login</a>
+                <a href="#" class="btn" id="mobile-signup-btn">Sign Up</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Section -->
+    <section class="tour" id="tour">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore NirogAI</h2>
+                <p>Take a multimedia tour to discover how NirogAI can transform your healthcare experience</p>
+            </div>
+            
+            <div class="tour-options">
+                <div class="tour-option" data-target="video">
+                    <div class="tour-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>Video Tour</h3>
+                    <p>Watch a guided video tour of NirogAI's features</p>
+                </div>
+                
+                <div class="tour-option" data-target="audio">
+                    <div class="tour-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Audio Guide</h3>
+                    <p>Listen to an audio explanation of our platform</p>
+                </div>
+                
+                <div class="tour-option" data-target="virtual">
+                    <div class="tour-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3>Virtual Tour</h3>
+                    <p>Experience an interactive virtual tour of NirogAI</p>
+                </div>
+            </div>
+            
+            <div class="tour-content active" id="video-content">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/0gNauGdOkzo" title="NirogAI Platform Overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            
+            <div class="tour-content" id="audio-content">
+                <div class="audio-player">
+                    <h3>NirogAI Audio Introduction</h3>
+                    <p>Listen to learn how NirogAI can help you manage your health</p>
+                    <div class="audio-controls">
+                        <div class="audio-btn" id="play-audio">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="audio-btn" id="pause-audio">
+                            <i class="fas fa-pause"></i>
+                        </div>
+                        <div class="audio-btn" id="stop-audio">
+                            <i class="fas fa-stop"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tour-content" id="virtual-content">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/7eCQlJcKp-c" title="NirogAI Virtual Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Healthcare Features</h2>
+                <p>NirogAI brings together advanced technology and healthcare expertise to serve communities across India</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Multilingual AI Chatbot</h3>
+                    <p>Answers health-related queries in multiple Indian languages + English. Provides preventive care tips, vaccination info, and outbreak updates.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3>Symptom Checker</h3>
+                    <p>Users enter symptoms in plain language. Chatbot suggests possible causes + whether to consult a doctor. Clear disclaimers to avoid self-diagnosis risks.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Vaccination & Health Reminders</h3>
+                    <p>Push notifications or SMS reminders for vaccines, check-ups, or wellness tips. Customizable reminders for family members.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>Outbreak Alerts</h3>
+                    <p>Real-time updates about diseases or public health advisories in the user's region. Data sourced from government & WHO APIs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Multilingual & Inclusive UI</h3>
+                    <p>Simple dashboard with big icons, voice/text input. Supports low literacy & semi-urban users.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Nearby Health Centers Locator</h3>
+                    <p>Integrates Google Maps API to show nearby government hospitals, PHCs, vaccination camps.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Preventive Health Knowledge Hub</h3>
+                    <p>Short, culturally appropriate articles/videos. Covers hygiene, nutrition, maternal care, mental health, etc.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Human Escalation Option</h3>
+                    <p>If chatbot cannot answer, users can connect with a helpline/health worker.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics & Feedback Loop</h3>
+                    <p>Tracks chatbot accuracy & usage trends. Collects user feedback to improve responses.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Privacy & Security</h3>
+                    <p>Anonymous usage, no sensitive data stored. End-to-end encrypted conversations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Experience Healthcare in Your Language</h2>
+            <p>Join thousands of users across India who are using NirogAI to take control of their health</p>
+            <a href="#" class="btn" id="cta-signup-btn">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About NirogAI</h3>
+                    <p>NirogAI is an AI-powered healthcare platform designed to make healthcare accessible to everyone in their preferred language.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> soumyamishra788@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 XXXXX XXXXX</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Languages Supported</h3>
+                    <p>English, Hindi, Marathi, Telugu, Bengali, Tamil, Gujarati, Kannada, Punjabi, and more</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 NirogAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modals -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="auth-form">
+                <h2>Login to Your Account</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-role">I am a</label>
+                        <select id="login-role">
+                            <option value="user">User/Patient</option>
+                            <option value="doctor">Healthcare Professional</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                </form>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" id="switch-to-signup">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="auth-form">
+                <h2>Create an Account</h2>
+                
+                <div class="role-selector">
+                    <div class="role-btn user active" data-role="user">User</div>
+                    <div class="role-btn doctor" data-role="doctor">Doctor</div>
+                    <div class="role-btn admin" data-role="admin">Admin</div>
+                </div>
+                
+                <form>
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" placeholder="Create a password">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" placeholder="Confirm your password">
+                    </div>
+                    
+                    <!-- Doctor-specific fields -->
+                    <div class="doctor-fields">
+                        <div class="form-group">
+                            <label for="doctor-id">Medical License ID</label>
+                            <input type="text" id="doctor-id" placeholder="Enter your medical license ID">
+                        </div>
+                        <div class="form-group">
+                            <label for="specialization">Specialization</label>
+                            <select id="specialization">
+                                <option value="">Select your specialization</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="general">General Medicine</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin-specific fields -->
+                    <div class="admin-fields">
+                        <div class="form-group">
+                            <label for="admin-code">Administrator Code</label>
+                            <input type="text" id="admin-code" placeholder="Enter administrator access code">
+                        </div>
+                        <div class="form-group">
+                            <label for="organization">Organization</label>
+                            <input type="text" id="organization" placeholder="Enter your organization">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Create Account</button>
+                </form>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" id="switch-to-login">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Translation data
+        const translations = [
+            { language: 'English', text: 'NirogAI' },
+            { language: 'Hindi', text: 'निरोगAI' },
+            { language: 'Marathi', text: 'निरोगAI' },
+            { language: 'Telugu', text: 'నిరోగ్AI' },
+            { language: 'Bengali', text: 'নিরোগAI' }
+        ];
+        
+        // DOM elements
+        const mainWord = document.getElementById('main-word');
+        const currentLanguageElement = document.getElementById('current-language');
+        
+        // State variables
+        let currentIndex = 0;
+        
+        // Function to update the display with current translation
+        function updateDisplay() {
+            const current = translations[currentIndex];
+            
+            // Update main word with animation
+            mainWord.style.opacity = 0;
+            mainWord.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                mainWord.textContent = current.text;
+                currentLanguageElement.textContent = current.language;
+                
+                mainWord.style.opacity = 1;
+                mainWord.style.transform = 'translateY(0)';
+            }, 500);
+            
+            // Move to next translation
+            currentIndex = (currentIndex + 1) % translations.length;
+        }
+        
+        // Start the automatic rotation
+        function startRotation() {
+            // Initial update
+            updateDisplay();
+            
+            // Set interval for continuous rotation
+            setInterval(updateDisplay, 2000);
+        }
+        
+        // Initialize the display and start rotation
+        startRotation();
+        
+        // Tour Functionality
+        const tourOptions = document.querySelectorAll('.tour-option');
+        const tourContents = document.querySelectorAll('.tour-content');
+        
+        tourOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                
+                // Hide all tour contents
+                tourContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show selected tour content
+                document.getElementById(`${target}-content`).classList.add('active');
+                
+                // Update active state for options
+                tourOptions.forEach(opt => {
+                    opt.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Auth Modal Functionality
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const mobileLoginBtn = document.getElementById('mobile-login-btn');
+        const mobileSignupBtn = document.getElementById('mobile-signup-btn');
+        const ctaSignupBtn = document.getElementById('cta-signup-btn');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const roleButtons = document.querySelectorAll('.role-btn');
+        const doctorFields = document.querySelector('.doctor-fields');
+        const adminFields = document.querySelector('.admin-fields');
+        
+        // Open login modal
+        function openLoginModal() {
+            loginModal.style.display = 'flex';
+            signupModal.style.display = 'none';
+        }
+        
+        // Open signup modal
+        function openSignupModal() {
+            signupModal.style.display = 'flex';
+            loginModal.style.display = 'none';
+        }
+        
+        // Close modals
+        function closeModals() {
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'none';
+        }
+        
+        // Handle role selection in signup
+        function handleRoleSelection(role) {
+            roleButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelector(`.role-btn[data-role="${role}"]`).classList.add('active');
+            
+            // Show/hide role-specific fields
+            if (role === 'doctor') {
+                doctorFields.style.display = 'block';
+                adminFields.style.display = 'none';
+            } else if (role === 'admin') {
+                doctorFields.style.display = 'none';
+                adminFields.style.display = 'block';
+            } else {
+                doctorFields.style.display = 'none';
+                adminFields.style.display = 'none';
+            }
+        }
+        
+        // Event listeners
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLoginModal();
+        });
+        
+        signupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openSignupModal();
+        });
+        
+        mobileLoginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLoginModal();
+        });
+        
+        mobileSignupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openSignupModal();
+        });
+        
+        ctaSignupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openSignupModal();
+        });
+        
+        switchToSignup.addEventListener('click', function(e) {
+            e.preventDefault();
+            openSignupModal();
+        });
+        
+        switchToLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            openLoginModal();
+        });
+        
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', closeModals);
+        });
+        
+        // Role selection event listeners
+        roleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const role = this.getAttribute('data-role');
+                handleRoleSelection(role);
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                closeModals();
+            }
+            if (e.target === signupModal) {
+                closeModals();
+            }
+        });
+        
+        // Initialize role selection to user
+        handleRoleSelection('user');
+    </script>
+</body>
+</html>
