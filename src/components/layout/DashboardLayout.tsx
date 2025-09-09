@@ -5,13 +5,11 @@ import { Navbar } from "./Navbar";
 interface DashboardLayoutProps {
   children: React.ReactNode;
   userRole?: 'user' | 'admin';
-  userName?: string;
 }
 
 export const DashboardLayout = ({ 
   children, 
-  userRole = 'user', 
-  userName = 'Samridhi' 
+  userRole = 'user'
 }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -30,7 +28,6 @@ export const DashboardLayout = ({
           <Navbar 
             onSidebarToggle={toggleSidebar}
             userRole={userRole}
-            userName={userName}
           />
           
           <main className="flex-1 overflow-y-auto bg-muted/30">

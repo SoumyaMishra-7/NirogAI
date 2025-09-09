@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import medicalHeroBg from "@/assets/medical-hero-bg.jpg";
+import Footer from "./Footer";  
 
 const quickActions = [
   {
@@ -75,7 +76,7 @@ export default function HomePage() {
   const greeting = getGreeting();
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen w-full flex flex-col">
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center justify-center bg-gradient-medical-hero"
@@ -280,6 +281,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

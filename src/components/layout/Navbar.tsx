@@ -17,10 +17,29 @@ import {
   Settings, 
   LogOut,
   Shield,
-  Moon,
-  Sun
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+
+// 🔹 Greeting function
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return "Good Morning";
+  if (hour < 18) return "Good Afternoon";
+  return "Good Evening";
+}
+
+// 🔹 Random health quote
+const quotes = [
+  "Health is wealth 💪",
+  "Stay hydrated 💧",
+  "Eat more greens 🥦",
+  "A healthy outside starts from inside 🌱",
+  "Rest well, recover well 😴"
+];
+
+function getRandomQuote() {
+  return quotes[Math.floor(Math.random() * quotes.length)];
+}
 
 interface NavbarProps {
   onSidebarToggle: () => void;
@@ -28,7 +47,11 @@ interface NavbarProps {
   userName?: string;
 }
 
-export const Navbar = ({ onSidebarToggle, userRole = 'user', userName = 'Samridhi' }: NavbarProps) => {
+export const Navbar = ({ 
+  onSidebarToggle, 
+  userRole = 'user', 
+  userName = 'User' 
+}: NavbarProps) => {
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border bg-card/95 backdrop-blur-glass">
       <div className="flex h-16 items-center justify-between px-4 lg:px-6">
@@ -53,10 +76,11 @@ export const Navbar = ({ onSidebarToggle, userRole = 'user', userName = 'Samridh
           </div>
         </div>
 
-        {/* Center - Welcome message */}
+        {/* Center - Greeting + Quote */}
         <div className="hidden lg:block">
           <div className="text-center">
-            <p className="text-sm text-muted-foreground">Good evening, {userName}!</p>
+            <p className="text-sm text-muted-foreground">{getGreeting()}!</p>
+            <p className="text-xs text-muted-foreground italic">{getRandomQuote()}</p>
             <div className="flex items-center justify-center gap-2 mt-1">
               <Badge variant="outline" className="text-xs">
                 {userRole === 'admin' ? 'Admin Dashboard' : 'Health Companion'}
