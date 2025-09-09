@@ -1,22 +1,27 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+// src/pages/DashboardHome.tsx
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ChatInterface } from "@/components/chat/ChatInterface";
-import { 
-  Bot, 
-  Stethoscope, 
-  Shield, 
-  FileText, 
-  Pill, 
-  BookOpen, 
-  Calendar,
-  TrendingUp,
-  Clock,
+import {
+  Bot,
+  Stethoscope,
+  Shield,
+  BookOpen,
   Heart,
   Activity,
-  Bell
+  Bell,
+  Clock,
+  LogOut,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
 const quickActions = [
   {
@@ -24,29 +29,29 @@ const quickActions = [
     description: "Get instant health advice and answers",
     icon: Bot,
     href: "/dashboard/chat",
-    color: "text-blue-600"
+    color: "text-blue-600",
   },
   {
     title: "Check Symptoms",
     description: "Assess symptoms and get guidance",
     icon: Stethoscope,
     href: "/dashboard/symptoms",
-    color: "text-purple-600"
+    color: "text-purple-600",
   },
   {
     title: "Health Tips",
     description: "Discover wellness tips",
     icon: BookOpen,
     href: "/dashboard/tips",
-    color: "text-green-600"
+    color: "text-green-600",
   },
   {
     title: "Vaccination Tracker",
     description: "Track vaccination schedule",
     icon: Shield,
     href: "/dashboard/vaccination",
-    color: "text-orange-600"
-  }
+    color: "text-orange-600",
+  },
 ];
 
 const healthMetrics = [
@@ -56,7 +61,7 @@ const healthMetrics = [
     change: "+5%",
     trend: "up",
     icon: Heart,
-    color: "text-green-600"
+    color: "text-green-600",
   },
   {
     title: "Active Days",
@@ -64,7 +69,7 @@ const healthMetrics = [
     change: "+3",
     trend: "up",
     icon: Activity,
-    color: "text-blue-600"
+    color: "text-blue-600",
   },
   {
     title: "Consultations",
@@ -72,7 +77,7 @@ const healthMetrics = [
     change: "+2",
     trend: "up",
     icon: Stethoscope,
-    color: "text-purple-600"
+    color: "text-purple-600",
   },
   {
     title: "Reminders",
@@ -80,50 +85,86 @@ const healthMetrics = [
     change: "0",
     trend: "neutral",
     icon: Bell,
-    color: "text-orange-600"
-  }
+    color: "text-orange-600",
+  },
 ];
 
 const recentActivity = [
   {
     title: "Symptom Check Completed",
     time: "2 hours ago",
-    type: "symptom"
+    type: "symptom",
   },
   {
     title: "Health Tip: 'Benefits of Walking'",
     time: "1 day ago",
-    type: "tip"
+    type: "tip",
   },
   {
     title: "Vaccination Reminder Set",
     time: "2 days ago",
-    type: "vaccination"
+    type: "vaccination",
   },
   {
     title: "Chat Session with AI",
     time: "3 days ago",
-    type: "chat"
-  }
+    type: "chat",
+  },
 ];
 
 export default function DashboardHome() {
+  const [username, setUsername] = useState("");
+  
+
+  useEffect(() => {
+    const storedName = localStorage.getItem("username");
+    if (storedName) {
+      setUsername(storedName);
+    }
+  }, []);
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return "Good Morning";
+    if (hour < 18) return "Good Afternoon";
+    return "Good Evening";
+  };
+const navigate = useNavigate();
+
+const handleLogout = () => {
+  localStorage.removeItem("username");
+  navigate("/"); 
+};
+
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
       <div className="bg-gradient-medical-hero rounded-xl p-6 text-white relative overflow-hidden">
         <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-2">
-            <Badge variant="outline" className="bg-white/10 text-white border-white/20">
+          <div className="flex items-center justify-between mb-2">
+            
+            <Badge
+              variant="outline"
+              className="bg-white/10 text-white border-white/20"
+            >
               <Heart className="w-4 h-4 mr-1" />
               Health Companion
             </Badge>
+            <Button
+              variant="ghost"
+              onClick={handleLogout}
+              className="text-white hover:bg-white/20"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </Button>
           </div>
           <h1 className="text-2xl lg:text-3xl font-bold mb-2">
-            Good evening, Samridhi!
+            {getGreeting()}, {username || "User"}!
           </h1>
           <p className="text-white/90 text-lg">
-            Your comprehensive healthcare assistant is ready to help you stay healthy and informed.
+            Your comprehensive healthcare assistant is ready to help you stay
+            healthy and informed.
           </p>
           <div className="flex flex-wrap gap-3 mt-4">
             <Button asChild className="bg-white text-primary hover:bg-white/90">
@@ -140,7 +181,9 @@ export default function DashboardHome() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
+        <h2 className="text-xl font-semibold text-foreground mb-4">
+          Quick Actions
+        </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickActions.map((action, index) => {
             const Icon = action.icon;
@@ -171,7 +214,9 @@ export default function DashboardHome() {
 
       {/* Health Metrics */}
       <div>
-        <h2 className="text-xl font-semibold text-foreground mb-4">Your Health Overview</h2>
+        <h2 className="text-xl font-semibold text-foreground mb-4">
+          Your Health Overview
+        </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {healthMetrics.map((metric, index) => {
             const Icon = metric.icon;
@@ -180,17 +225,21 @@ export default function DashboardHome() {
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">{metric.title}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {metric.title}
+                      </p>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-2xl font-bold text-foreground">
                           {metric.value}
                         </span>
-                        <Badge 
-                          variant="outline" 
+                        <Badge
+                          variant="outline"
                           className={`text-xs ${
-                            metric.trend === 'up' ? 'text-green-600 border-green-200' : 
-                            metric.trend === 'down' ? 'text-red-600 border-red-200' : 
-                            'text-muted-foreground'
+                            metric.trend === "up"
+                              ? "text-green-600 border-green-200"
+                              : metric.trend === "down"
+                              ? "text-red-600 border-red-200"
+                              : "text-muted-foreground"
                           }`}
                         >
                           {metric.change}
@@ -217,7 +266,10 @@ export default function DashboardHome() {
             <CardContent>
               <div className="space-y-3">
                 {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-muted/50">
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-3 rounded-lg bg-muted/50"
+                  >
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
                       <Clock className="w-4 h-4 text-primary" />
                     </div>
