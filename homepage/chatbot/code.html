@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NirogAI Chatbot</title>
+</head>
+<body>
+  <h2>Welcome to NirogAI</h2>
+  <p>Your personal health assistant is available in the bottom-right corner.</p>
+
+  <!-- Dialogflow Messenger SDK -->
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+
+  <!-- Chatbot widget -->
+  <df-messenger
+    chat-icon="https://cdn-icons-png.flaticon.com/512/295/295128.png"
+    intent="WELCOME"
+    chat-title="NirogAI"
+    agent-id="aca63bf8-6aac-47bb-a32b-b4c12ae6da97"
+    language-code="en"
+  ></df-messenger>
+</body>
+</html>
