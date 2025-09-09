@@ -10,6 +10,10 @@ import NotFound from "./pages/NotFound";
 import { ChatInterface } from "./components/chat/ChatInterface";
 import VaccinationTracker from "./pages/dashboard/VaccinationTracker"; 
 import Symptoms from "./pages/dashboard/symptoms";
+import RoleSelection from "./pages/RoleSelection";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import AdminDashboard from "./pages/dashboard/AdminDashboard";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -62,6 +66,15 @@ const App = () => (
               </div>
             </DashboardLayout>
           } />
+          <Route
+  path="/admin/dashboard"
+  element={
+    <DashboardLayout userRole="admin">
+      <AdminDashboard />
+    </DashboardLayout>
+  }
+/>
+
           <Route path="/dashboard/medicines" element={
             <DashboardLayout>
               <div className="text-center py-12">
@@ -104,6 +117,29 @@ const App = () => (
               </div>
             </DashboardLayout>
           } />
+           {/* Get Started → Role Selection */}
+          <Route path="/get-started" element={<RoleSelection/>} />
+
+          {/* Auth Routes */}
+<Route path="/:role/login" element={<Login />} />
+<Route path="/:role/signup" element={<Signup />} />
+{/* User Dashboard */}
+<Route path="/user/dashboard" element={
+  <DashboardLayout>
+    <DashboardHome />
+  </DashboardLayout>
+} />
+
+{/* Admin Dashboard */}
+<Route path="/admin/dashboard" element={
+  <DashboardLayout userRole="admin">
+    <div className="text-center py-12">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <p className="text-muted-foreground">Welcome, Admin!</p>
+    </div>
+  </DashboardLayout>
+} />
+
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

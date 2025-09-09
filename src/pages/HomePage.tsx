@@ -87,7 +87,18 @@ export default function HomePage() {
         }}
       >
         <div className="absolute inset-0 bg-gradient-medical-hero/80" />
-        
+        <div className="absolute top-6 right-6 z-20">
+    <Button
+      size="lg"
+      asChild
+      className="bg-white text-primary font-bold tracking-wide px-6 py-3 rounded-xl 
+                 shadow-lg hover:shadow-xl transition-all duration-300"
+    >
+      <Link to="/get-started">
+        Get Started
+      </Link>
+    </Button>
+  </div>
         <div className="relative z-10 container mx-auto px-4 lg:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -126,6 +137,7 @@ export default function HomePage() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </div>
+              
               
               {/* Features list */}
               <div className="grid grid-cols-2 gap-2 text-sm text-white/80">
@@ -197,7 +209,7 @@ export default function HomePage() {
             {/* Feature cards would go here - similar to quick actions but more comprehensive */}
             <div className="col-span-full text-center">
               <Button size="lg" asChild>
-                <Link to="/dashboard">
+                <Link to="/get-started">
                   <Heart className="w-5 h-5 mr-2" />
                   Explore Full Dashboard
                 </Link>
