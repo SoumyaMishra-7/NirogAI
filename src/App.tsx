@@ -77,14 +77,17 @@ const App = () => (
             </DashboardLayout>
           }
         />
+        
+        {/* Vaccination Tracker Route */}
         <Route
-          path="/dashboard/VaccinationTracker"
+          path="/dashboard/vaccination"
           element={
             <DashboardLayout>
               <VaccinationTracker />
             </DashboardLayout>
           }
         />
+        
         <Route
           path="/dashboard/symptoms"
           element={
