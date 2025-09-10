@@ -37,9 +37,10 @@ export default function AdminDashboard() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("username");
-    window.location.href = "/"; // ✅ force home page
-  };
+  localStorage.removeItem("username");
+  navigate("/"); 
+};
+
 
   const quickActions = [
     {
@@ -97,27 +98,29 @@ export default function AdminDashboard() {
               variant="outline"
               className="bg-white/10 text-white border-white/20"
             >
-              Admin Panel
+              Admin
             </Badge>
             <Button
               variant="ghost"
               onClick={handleLogout}
               className="text-white hover:bg-white/20"
-            >
+              >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
             </Button>
           </div>
+          <div className="flex flex-col items-center justify-center text-center py-10">
           <h1 className="text-2xl lg:text-3xl font-bold mb-2">
             {getGreeting()}, {adminName || "Admin"}!
           </h1>
           <p className="text-white/90 text-lg">
             Manage users, monitor system health, and keep the platform secure.
           </p>
+          </div>
         </div>
       </div>
 
-      {/* Quick Actions */}
+     { /* Quick Actions */}
       <div>
         <h2 className="text-xl font-semibold text-foreground mb-4">
           Quick Actions
