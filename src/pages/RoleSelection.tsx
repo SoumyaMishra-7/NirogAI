@@ -37,20 +37,23 @@ export default function RoleSelection() {
 
   const handleStart = async () => {
   if (isSignedIn && user) {
-    const currentRole = user.publicMetadata.role;
+    const currentRole = (user as any).publicMetadata?.role;
+
     if (currentRole && currentRole === selectedRole) {
-      // Role already set → directly dashboard
       navigate(`/${selectedRole}/dashboard`, { replace: true });
       return;
     }
-    // Set role for the first time
-    await (user as any).update({ publicMetadata: { role: selectedRole } });
+
+    await (user as any).update({
+      publicMetadata: { role: selectedRole },
+    });
+
     navigate(`/${selectedRole}/dashboard`, { replace: true });
   } else {
-    // Not signed-in → send to sign-in
     navigate("/sign-in", { state: { role: selectedRole } });
   }
 };
+
 
 
   const handleSignOut = async () => {
@@ -98,14 +101,18 @@ export default function RoleSelection() {
           {/* Action Buttons */}
           <div className="mt-4 flex flex-col sm:flex-row gap-3">
             <Button
-              onClick={handleStart}
-              size="lg"
-              className="w-full bg-primary hover:bg-primary/90 text-white font-semibold"
-            >
-              {isSignedIn
-                ? `Continue as ${selectedRole}`
-                : `Sign in as ${selectedRole}`}
-            </Button>
+  onClick={(e) => {
+    console.log("BUTTON RAW CLICKED");
+    e.stopPropagation();
+    handleStart();
+  }}
+  type="button"
+  size="lg"
+  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold pointer-events-auto z-50"
+>
+  {isSignedIn ? `Continue as ${selectedRole}` : `Sign in as ${selectedRole}`}
+</Button>
+
 
             {isSignedIn && (
               <Button

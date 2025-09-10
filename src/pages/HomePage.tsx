@@ -161,42 +161,51 @@ export default function HomePage() {
 
       {/* Quick Actions Section */}
       <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Quick Actions</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Access the most commonly used features to get the health assistance you need
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickActions.map((action, index) => {
-              const Icon = action.icon;
-              return (
-                <Link key={index} to={action.href}>
-                  <Card className="group hover:shadow-medical transition-all duration-300 cursor-pointer bg-gradient-medical-card">
-                    <CardHeader className="text-center">
-                      <div className={`w-12 h-12 mx-auto rounded-lg ${action.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <CardTitle className="text-lg">{action.title}</CardTitle>
-                      <CardDescription className="text-sm">
-                        {action.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="pt-0 text-center">
-                      <Button variant="ghost" size="sm" className="group-hover:bg-primary/10">
-                        Get Started
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </CardContent>
-                  </Card>
+  <div className="container mx-auto px-4 lg:px-6">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold text-foreground mb-4">Quick Actions</h2>
+      <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+        Access the most commonly used features to get the health assistance you need
+      </p>
+    </div>
+    
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {quickActions.map((action, index) => {
+        const Icon = action.icon;
+        return (
+          <Card 
+            key={index} 
+            className="group hover:shadow-medical transition-all duration-300 cursor-pointer bg-gradient-medical-card"
+          >
+            <CardHeader className="text-center">
+              <div className={`w-12 h-12 mx-auto rounded-lg ${action.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}>
+                <Icon className="w-6 h-6" />
+              </div>
+              <CardTitle className="text-lg">{action.title}</CardTitle>
+              <CardDescription className="text-sm">
+                {action.description}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="pt-0 text-center">
+              <Button 
+                asChild 
+                variant="ghost" 
+                size="sm" 
+                className="group-hover:bg-primary/10"
+              >
+                <Link to={action.href}>
+                  Go to {action.title}
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+              </Button>
+            </CardContent>
+          </Card>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
 
       {/* All Features Section */}
 <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-gray-100">

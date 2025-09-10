@@ -85,7 +85,7 @@ const App = () => {
           <Route
   path="/dashboard/chat"
   element={
-    <UserRoute>
+    
       <DashboardLayout>
         <div className="max-w-4xl mx-auto">
           <div className="mb-6">
@@ -99,28 +99,23 @@ const App = () => {
           <ChatInterface />
         </div>
       </DashboardLayout>
-    </UserRoute>
-  }
-/>
+    }
+  />
 
           <Route
             path="/dashboard/VaccinationTracker"
             element={
-              <UserRoute>
-                <DashboardLayout>
-                  <VaccinationTracker />
-                </DashboardLayout>
-              </UserRoute>
+              <DashboardLayout>
+                <VaccinationTracker />
+              </DashboardLayout>
             }
           />
           <Route
             path="/dashboard/symptoms"
             element={
-              <UserRoute>
-                <DashboardLayout>
-                  <Symptoms />
-                </DashboardLayout>
-              </UserRoute>
+              <DashboardLayout>
+                <Symptoms />
+              </DashboardLayout>
             }
           />
 
