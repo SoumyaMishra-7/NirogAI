@@ -133,15 +133,15 @@ const navigate = useNavigate();
 
 const handleLogout = () => {
   localStorage.removeItem("username");
-  navigate("/"); 
+  navigate("/login"); 
 };
 
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-medical-hero rounded-xl p-6 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-green-500 rounded-xl p-6 text-white relative overflow-hidden">
         <div className="relative z-10">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-4">
             
             <Badge
               variant="outline"
@@ -159,15 +159,15 @@ const handleLogout = () => {
               Logout
             </Button>
           </div>
+          <div className="flex flex-col items-center justify-center text-center space-y-3 py-6">
           <h1 className="text-2xl lg:text-3xl font-bold mb-2">
             {getGreeting()}, {username || "User"}!
           </h1>
-          <p className="text-white/90 text-lg">
+          <p className="text-white/90 text-lg max-w-xl">
             Your comprehensive healthcare assistant is ready to help you stay
             healthy and informed.
           </p>
-          <div className="flex flex-wrap gap-3 mt-4">
-            <Button asChild className="bg-white text-primary hover:bg-white/90">
+            <Button asChild variant="outline" className="border-white text-white hover:bg-white/10 mt-4">
               <Link to="/dashboard/chat">
                 <Bot className="w-4 h-4 mr-2" />
                 Start Chat with HealthBot
@@ -189,7 +189,7 @@ const handleLogout = () => {
             const Icon = action.icon;
             return (
               <Link key={index} to={action.href}>
-                <Card className="group hover:shadow-medical transition-all duration-300 cursor-pointer">
+                <Card className="group hover:border-blue-500 transition-all duration-300 cursor-pointer">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -296,3 +296,4 @@ const handleLogout = () => {
     </div>
   );
 }
+
