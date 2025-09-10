@@ -199,88 +199,105 @@ export default function HomePage() {
       </section>
 
       {/* All Features Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">All Features</h2>
-            <p className="text-muted-foreground text-lg">Comprehensive healthcare tools at your fingertips</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Feature cards would go here - similar to quick actions but more comprehensive */}
-            <div className="col-span-full text-center">
-              <Button size="lg" asChild>
-                <Link to="/get-started">
-                  <Heart className="w-5 h-5 mr-2" />
-                  Explore Full Dashboard
-                </Link>
-              </Button>
+<section className="py-20 bg-gradient-to-br from-white via-gray-50 to-gray-100">
+  <div className="container mx-auto px-4 lg:px-6">
+    <div className="text-center mb-14">
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">All Features</h2>
+      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        Discover modern healthcare tools built with AI & smart design
+      </p>
+    </div>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, index) => (
+        <Card
+          key={index}
+          className="relative p-6 rounded-2xl bg-white/70 backdrop-blur-md shadow-sm 
+                     border border-gray-100 hover:shadow-lg hover:-translate-y-1 
+                     transition-all duration-300"
+        >
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 flex items-center justify-center rounded-xl 
+                            bg-gradient-to-tr from-primary/10 to-primary/5 text-primary">
+              <CheckCircle className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-lg text-gray-800">{feature}</h3>
+              <p className="text-sm text-gray-500 mt-1">
+                Detailed info and smart insights at your fingertips
+              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </Card>
+      ))}
+    </div>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gradient-medical-primary text-white">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="flex flex-col items-center">
-                  <Icon className="w-8 h-8 mb-3 opacity-90" />
-                  <div className="text-3xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-white/80">{stat.label}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+    <div className="col-span-full text-center mt-12">
+      <Button size="lg" asChild className="rounded-xl px-8 shadow-md hover:shadow-lg">
+        <Link to="/get-started">
+          <Heart className="w-5 h-5 mr-2" />
+          Explore Full Dashboard
+        </Link>
+      </Button>
+    </div>
+  </div>
+</section>
 
-      {/* Your Health Journey Section */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 lg:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Your Health Journey</h2>
-            <p className="text-muted-foreground text-lg">Track your progress and milestones</p>
+{/* Stats Section */}
+<section className="py-20 bg-gradient-to-r from-primary via-blue-600 to-primary-foreground text-white">
+  <div className="container mx-auto px-4 lg:px-6">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+      {stats.map((stat, index) => {
+        const Icon = stat.icon;
+        return (
+          <div
+            key={index}
+            className="flex flex-col items-center bg-white/10 backdrop-blur-md 
+                       rounded-2xl p-6 shadow-inner hover:scale-105 transition-transform duration-300"
+          >
+            <Icon className="w-10 h-10 mb-3 opacity-90"/>
+            <div className="text-3xl font-bold mb-1">{stat.value}</div>
+            <div className="text-white/80">{stat.label}</div>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="bg-blue-500 text-white">
-              <CardContent className="p-6 text-center">
-                <Heart className="w-8 h-8 mx-auto mb-3" />
-                <div className="text-2xl font-bold mb-1">12</div>
-                <div className="text-blue-100">Health Tips Read</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-green-500 text-white">
-              <CardContent className="p-6 text-center">
-                <Stethoscope className="w-8 h-8 mx-auto mb-3" />
-                <div className="text-2xl font-bold mb-1">3</div>
-                <div className="text-green-100">Symptoms Checked</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-purple-500 text-white">
-              <CardContent className="p-6 text-center">
-                <BookOpen className="w-8 h-8 mx-auto mb-3" />
-                <div className="text-2xl font-bold mb-1">5</div>
-                <div className="text-purple-100">Quizzes Completed</div>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-orange-500 text-white">
-              <CardContent className="p-6 text-center">
-                <Calendar className="w-8 h-8 mx-auto mb-3" />
-                <div className="text-2xl font-bold mb-1">8</div>
-                <div className="text-orange-100">Reminders Set</div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+{/* Your Health Journey Section */}
+<section className="py-20 bg-gray-50">
+  <div className="container mx-auto px-4 lg:px-6">
+    <div className="text-center mb-14">
+      <h2 className="text-4xl font-bold text-gray-900 mb-4">Your Health Journey</h2>
+      <p className="text-lg text-gray-600">Track progress with a modern, gamified touch</p>
+    </div>
+
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { icon: Heart, value: "12", label: "Health Tips Read", color: "from-pink-500 to-rose-500" },
+        { icon: Stethoscope, value: "3", label: "Symptoms Checked", color: "from-green-500 to-emerald-500" },
+        { icon: BookOpen, value: "5", label: "Quizzes Completed", color: "from-purple-500 to-indigo-500" },
+        { icon: Calendar, value: "8", label: "Reminders Set", color: "from-orange-500 to-amber-500" },
+      ].map((item, index) => {
+        const Icon = item.icon;
+        return (
+          <Card
+            key={index}
+            className={`p-6 text-center rounded-2xl shadow-lg 
+                       bg-gradient-to-tr ${item.color} text-white hover:-translate-y-1 
+                       transition-transform duration-300`}
+          >
+            <Icon className="w-8 h-8 mx-auto mb-3" />
+            <div className="text-3xl font-bold">{item.value}</div>
+            <div className="text-white/80">{item.label}</div>
+          </Card>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
       {/* Footer */}
       <Footer />
     </div>

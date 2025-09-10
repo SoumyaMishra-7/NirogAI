@@ -27,18 +27,18 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/dashboard/chat" className="hover:text-primary transition-colors">
-                Chat with AI
-              </Link>
-            </li>
-            <li>
               <Link to="/dashboard/symptoms" className="hover:text-primary transition-colors">
                 Symptom Checker
               </Link>
             </li>
             <li>
-              <Link to="/dashboard/vaccination" className="hover:text-primary transition-colors">
-                Vaccination Info
+              <Link to="/dashboard/VaccinationTracker" className="hover:text-primary transition-colors">
+                Vaccination Tracker
+              </Link>
+            </li>
+            <li>
+              <Link to="/dashboard/ChatInterface" className="hover:text-primary transition-colors">
+                Chat with AI
               </Link>
             </li>
           </ul>
@@ -66,7 +66,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t py-4 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} NirogAI. All rights reserved.
+        {new Date().getFullYear()} NirogAI. All rights reserved.
       </div>
     </footer>
   );
