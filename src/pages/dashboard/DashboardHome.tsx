@@ -112,6 +112,7 @@ export default function DashboardHome() {
     return "Good Evening";
   };
 
+
   const handleLogout = () => {
     localStorage.removeItem("username");
     navigate("/");
@@ -125,6 +126,25 @@ export default function DashboardHome() {
           <div className="flex items-center justify-between mb-4">
             <Badge className="bg-white/20 text-white border-white/30">
               <Heart className="w-5 h-5 mr-1" />
+
+const handleLogout = () => {
+  localStorage.removeItem("username");
+  navigate("/login"); 
+};
+
+  return (
+    <div className="space-y-6">
+      {/* Welcome Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-green-500 rounded-xl p-6 text-white relative overflow-hidden">
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-4">
+            
+            <Badge
+              variant="outline"
+              className="bg-white/10 text-white border-white/20"
+            >
+              <Heart className="w-4 h-4 mr-1" />
+
               Health Companion
             </Badge>
             <Button
@@ -135,6 +155,7 @@ export default function DashboardHome() {
               <LogOut className="w-5 h-5" /> Logout
             </Button>
           </div>
+
           <h1 className="text-3xl lg:text-4xl font-bold mb-2">
             {getGreeting()}, {username || "User"}!
           </h1>
@@ -146,6 +167,20 @@ export default function DashboardHome() {
               <Link to="/dashboard/chat" className="flex items-center gap-2">
                 <Bot className="w-5 h-5" />
                 Start Chat
+
+          <div className="flex flex-col items-center justify-center text-center space-y-3 py-6">
+          <h1 className="text-2xl lg:text-3xl font-bold mb-2">
+            {getGreeting()}, {username || "User"}!
+          </h1>
+          <p className="text-white/90 text-lg max-w-xl">
+            Your comprehensive healthcare assistant is ready to help you stay
+            healthy and informed.
+          </p>
+            <Button asChild variant="outline" className="border-white text-white hover:bg-white/10 mt-4">
+              <Link to="/dashboard/chat">
+                <Bot className="w-4 h-4 mr-2" />
+                Start Chat with HealthBot
+
               </Link>
             </Button>
           </div>
@@ -162,8 +197,13 @@ export default function DashboardHome() {
           {quickActions.map((action, i) => {
             const Icon = action.icon;
             return (
+
               <Link key={i} to={action.href}>
                 <Card className="group hover:shadow-xl transition-all duration-300 cursor-pointer rounded-xl">
+
+              <Link key={index} to={action.href}>
+                <Card className="group hover:border-blue-500 transition-all duration-300 cursor-pointer">
+
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -269,3 +309,4 @@ export default function DashboardHome() {
     </div>
   );
 }
+
