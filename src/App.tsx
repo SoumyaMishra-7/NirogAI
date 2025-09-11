@@ -115,19 +115,7 @@ const App = () => (
           }
         />
 
-        {/* Admin Dashboard */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <DashboardLayout userRole="admin">
-              <AdminDashboard />
-            </DashboardLayout>
-          }
-        />
 
-        {/* Catch All */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
 );
