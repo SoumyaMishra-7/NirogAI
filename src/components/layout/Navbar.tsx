@@ -19,6 +19,8 @@ import {
   Shield,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useUser, useClerk } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 // 🔹 Greeting function
 function getGreeting() {
@@ -44,14 +46,27 @@ function getRandomQuote() {
 interface NavbarProps {
   onSidebarToggle: () => void;
   userRole?: 'user' | 'admin';
-  userName?: string;
 }
 
 export const Navbar = ({ 
   onSidebarToggle, 
-  userRole = 'user', 
-  userName = 'User' 
+  userRole = 'user'
 }: NavbarProps) => {
+  const { signOut } = useClerk();
+  const navigate = useNavigate();
+  const { user } = useUser();
+  const userEmail = user?.primaryEmailAddress?.emailAddress || '';
+  const userName = user?.fullName || user?.username || 'User';
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-30 w-full border-b border-border bg-card/95 backdrop-blur-glass">
       <div className="flex h-16 items-center justify-between px-4 lg:px-6">
@@ -109,21 +124,30 @@ export const Navbar = ({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="flex items-center gap-2 px-2">
                 <Avatar className="w-8 h-8">
-                  <AvatarImage src="/placeholder-avatar.jpg" alt={userName} />
+                  <AvatarImage src={user?.imageUrl} alt={userName} />
                   <AvatarFallback className="bg-gradient-medical-primary text-white text-sm">
-                    {userName.charAt(0)}
+                    {userName.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="hidden sm:block text-left">
-                  <p className="text-sm font-medium">{userName}</p>
-                  <p className="text-xs text-muted-foreground capitalize">
-                    {userRole} Account
-                  </p>
+                  <p className="text-sm font-medium line-clamp-1">{userName}</p>
+                  {userEmail && (
+                    <p className="text-xs text-muted-foreground line-clamp-1">
+                      {userEmail}
+                    </p>
+                  )}
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <div className="px-2 py-1.5">
+                <p className="text-sm font-medium">{userName}</p>
+                {userEmail && (
+                  <p className="text-xs text-muted-foreground line-clamp-1">
+                    {userEmail}
+                  </p>
+                )}
+              </div>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
@@ -140,7 +164,10 @@ export const Navbar = ({
                 </DropdownMenuItem>
               )}
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-destructive">
+              <DropdownMenuItem 
+                className="text-destructive cursor-pointer"
+                onClick={handleLogout}
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>

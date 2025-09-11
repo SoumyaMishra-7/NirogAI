@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
+import dynamic from "next/dynamic";
+
+// Dynamically import SOSButton with no SSR to avoid hydration issues
+const SOSButton = dynamic(() => import("../SOSButton"), { ssr: false });
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -33,6 +37,8 @@ export const DashboardLayout = ({
           <main className="flex-1 overflow-y-auto bg-muted/30">
             <div className="container mx-auto p-4 lg:p-6">
               {children}
+              {/* Add SOS Button to all dashboard pages */}
+              <SOSButton />
             </div>
           </main>
         </div>
