@@ -109,10 +109,10 @@ const App = () => (
           } />
           
           {/* Admin Routes */}
-          <Route path="/admin/*" element={
+          <Route path="/admin/coming-soon" element={
             <DashboardLayout userRole="admin">
               <div className="text-center py-12">
-                <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+                <h1 className="text-2xl font-bold mb-4">Admin Features</h1>
                 <p className="text-muted-foreground">Coming soon - Administrative features</p>
               </div>
             </DashboardLayout>
@@ -127,16 +127,6 @@ const App = () => (
 <Route path="/user/dashboard" element={
   <DashboardLayout>
     <DashboardHome />
-  </DashboardLayout>
-} />
-
-{/* Admin Dashboard */}
-<Route path="/admin/dashboard" element={
-  <DashboardLayout userRole="admin">
-    <div className="text-center py-12">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-      <p className="text-muted-foreground">Welcome, Admin!</p>
-    </div>
   </DashboardLayout>
 } />
 
