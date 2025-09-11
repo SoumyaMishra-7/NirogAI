@@ -1,6 +1,7 @@
 // src/pages/DashboardHome.tsx
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 import {
   Card,
   CardContent,
@@ -21,9 +22,21 @@ import {
   Bell,
   Clock,
   LogOut,
+  AlertTriangle,
+  ArrowRight,
+  Thermometer,
+  MapPin,
+  Users,
 } from "lucide-react";
 
 const quickActions = [
+  {
+    title: "Outbreak Alerts",
+    description: "View active health alerts",
+    icon: AlertTriangle,
+    href: "/dashboard/outbreak-alerts",
+    color: "bg-orange-100 text-orange-600",
+  },
   {
     title: "Chat with HealthBot",
     description: "Get instant health advice",
@@ -96,14 +109,40 @@ const recentActivity = [
   { title: "Chat Session with AI", time: "3 days ago", type: "chat" },
 ];
 
-export default function DashboardHome() {
-  const [username, setUsername] = useState("");
+const OutbreakAlertCard = () => {
   const navigate = useNavigate();
+  
+  return (
+    <Card className="border-l-4 border-orange-500 hover:shadow-md transition-shadow">
+      <CardContent className="p-4">
+        <div className="flex items-start justify-between">
+          <div className="flex items-start space-x-3">
+            <div className="p-2 bg-orange-100 rounded-lg">
+              <AlertTriangle className="h-5 w-5 text-orange-600" />
+            </div>
+            <div>
+              <h3 className="font-medium">Active Health Alerts</h3>
+              <p className="text-sm text-muted-foreground">
+                There are 3 active outbreaks in your region
+              </p>
+              <div className="mt-2 flex items-center text-sm text-orange-600">
+                <span className="font-medium">View Alerts</span>
+                <ArrowRight className="h-4 w-4 ml-1" />
+              </div>
+            </div>
+          </div>
+          <Badge variant="destructive" className="animate-pulse">
+            New
+          </Badge>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
 
-  useEffect(() => {
-    const storedName = localStorage.getItem("username");
-    if (storedName) setUsername(storedName);
-  }, []);
+export default function DashboardHome() {
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -113,9 +152,10 @@ export default function DashboardHome() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("username");
     navigate("/");
   };
+
+  const displayName = user?.fullName || user?.username || 'User';
 
   return (
     <div className="space-y-8 p-6">
@@ -136,7 +176,7 @@ export default function DashboardHome() {
             </Button>
           </div>
           <h1 className="text-3xl lg:text-4xl font-bold mb-2">
-            {getGreeting()}, {username || "User"}!
+            {getGreeting()}, {displayName}!
           </h1>
           <p className="text-white/90 text-lg mb-4">
             Your personalized healthcare dashboard. Stay informed and healthy.
@@ -153,6 +193,11 @@ export default function DashboardHome() {
         {/* Decorative Circles */}
         <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -translate-y-16 translate-x-16" />
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full translate-y-12 -translate-x-12" />
+      </div>
+
+      {/* Outbreak Alert Card */}
+      <div onClick={() => navigate('/dashboard/outbreak-alerts')} className="cursor-pointer">
+        <OutbreakAlertCard />
       </div>
 
       {/* Quick Actions */}

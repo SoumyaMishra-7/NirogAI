@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useUser } from "@clerk/clerk-react";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Table, TableHeader, TableRow, TableHead, TableCell, TableBody } from "@/components/ui/table";
@@ -38,8 +39,12 @@ type Prescription = {
 };
 
 export default function DoctorDashboard() {
+  const { user } = useUser();
   const [activeTab, setActiveTab] = useState('overview');
   const [searchQuery, setSearchQuery] = useState('');
+
+  // Get the doctor's name from Clerk user data
+  const doctorName = user?.fullName || user?.username || 'Doctor';
 
   const upcomingAppointments: Appointment[] = [
     { id: 1, patientName: 'Ravi Kumar', time: '10:00 AM', type: 'followup', status: 'upcoming', avatar: '/avatars/1.jpg' },
@@ -86,7 +91,7 @@ export default function DoctorDashboard() {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Doctor Dashboard</h1>
-          <p className="text-gray-600">Welcome back, Dr. Sharma</p>
+          <p className="text-gray-600">Welcome back, Dr. {doctorName.split(' ')[0]}</p>
         </div>
         <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="relative flex-1 md:max-w-md">

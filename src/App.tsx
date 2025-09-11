@@ -21,6 +21,7 @@ import VaccinationTracker from "./pages/dashboard/VaccinationTracker";
 import Symptoms from "./pages/dashboard/symptoms";
 import { ChatInterface } from "./components/chat/ChatInterface";
 import VaccineInfo from "./pages/dashboard/VaccineInfo";
+import OutbreakAlertsPage from "./pages/dashboard/OutbreakAlertsPage";
 const queryClient = new QueryClient();
 
 // Auth Layout for Clerk
@@ -124,6 +125,16 @@ const App = () => {
             element={
               <DashboardLayout>
                 <VaccineInfo />
+              </DashboardLayout>
+            }
+          />
+
+          {/* Outbreak Alerts */}
+          <Route
+            path="/dashboard/outbreak-alerts"
+            element={
+              <DashboardLayout>
+                <OutbreakAlertsPage />
               </DashboardLayout>
             }
           />
