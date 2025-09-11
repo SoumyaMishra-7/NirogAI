@@ -39,7 +39,7 @@ const quickActions = [
     title: "Vaccination Info",
     description: "Discover daily tips for better health and wellness",
     icon: Shield,
-    href: "/dashboard/vaccination",
+    href: "/dashboard/VaccineInfo",
     color: "bg-green-500/10 text-green-600"
   },
   {

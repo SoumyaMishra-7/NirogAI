@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { SignIn, SignUp, useAuth } from "@clerk/clerk-react";
 
 // Protected routes
-import { UserRoute, AdminRoute, DoctorRoute } from "@/components/auth/ProtectedRoute";
+import { UserRoute, AdminRoute, DoctorRoute, ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { AuthRedirect } from "@/components/auth/AuthRedirect";
 
 // Pages
@@ -20,7 +20,7 @@ import RoleSelection from "./pages/RoleSelection";
 import VaccinationTracker from "./pages/dashboard/VaccinationTracker";
 import Symptoms from "./pages/dashboard/symptoms";
 import { ChatInterface } from "./components/chat/ChatInterface";
-
+import VaccineInfo from "./pages/dashboard/VaccineInfo";
 const queryClient = new QueryClient();
 
 // Auth Layout for Clerk
@@ -75,11 +75,11 @@ const App = () => {
           <Route
             path="/user/dashboard"
             element={
-              <UserRoute>
+              
                 <DashboardLayout>
                   <DashboardHome />
                 </DashboardLayout>
-              </UserRoute>
+              
             }
           />
           <Route
@@ -119,29 +119,37 @@ const App = () => {
             }
           />
 
+          <Route
+            path="/dashboard/VaccineInfo"
+            element={
+              <DashboardLayout>
+                <VaccineInfo />
+              </DashboardLayout>
+            }
+          />
+
           {/* Admin Dashboard */}
           <Route
             path="/admin/dashboard"
             element={
-              <AdminRoute>
+              
                 <DashboardLayout>
                   <AdminDashboard />
                 </DashboardLayout>
-              </AdminRoute>
+              
             }
           />
 
           {/* Doctor Dashboard */}
           <Route
-            path="/doctor/dashboard"
-            element={
-              <DoctorRoute>
-                <DashboardLayout>
-                  <DoctorDashboard />
-                </DashboardLayout>
-              </DoctorRoute>
-            }
-          />
+  path="/doctor/dashboard"
+  element={
+    
+      <DashboardLayout>
+        <DoctorDashboard />
+      </DashboardLayout>
+    }
+  />
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
