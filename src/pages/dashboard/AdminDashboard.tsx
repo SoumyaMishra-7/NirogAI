@@ -91,12 +91,12 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl p-6 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-600 to-green-500 rounded-xl p-6 text-white relative overflow-hidden">
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-2">
             <Badge
               variant="outline"
-              className="bg-white/10 text-white border-white/20"
+              className="bg-grey/10 text-white border-white/20"
             >
               Admin
             </Badge>
